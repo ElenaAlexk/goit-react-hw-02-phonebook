@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import React from 'react';
 import { Component } from 'react';
 import { ContactForm } from './ContactForm';
@@ -14,7 +15,16 @@ export class App extends Component {
   };
 
   formSubmitHandler = data => {
-    console.log(data);
+    const { name, number } = data;
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+    this.setState(({ contacts }) => ({
+      contacts: [newContact, ...contacts],
+    }));
   };
 
   render() {

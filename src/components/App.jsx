@@ -4,6 +4,7 @@ import { Component } from 'react';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
+import css from './Contacts.module.css';
 
 export default class App extends Component {
   state = {
@@ -63,7 +64,7 @@ export default class App extends Component {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
     return (
-      <div>
+      <div className={css.container}>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>

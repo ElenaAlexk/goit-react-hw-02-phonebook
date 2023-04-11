@@ -3,6 +3,7 @@ import React from 'react';
 import { Component } from 'react';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
+import { Filter } from './Filter';
 
 export default class App extends Component {
   state = {
@@ -46,13 +47,31 @@ export default class App extends Component {
     });
   };
 
+  changeFilter = event => {
+    this.setState({ filter: event.currentTarget.value.toLowerCase() });
+  };
+
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
   render() {
+    const { filter } = this.state;
+    const visibleContacts = this.getVisibleContacts();
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
-        <ContactList deleteContact={this.deleteContact} />
+        <Filter value={filter} onChange={this.changeFilter} />
+        <ContactList
+          deleteContact={this.deleteContact}
+          contacts={visibleContacts}
+        />
       </div>
     );
   }

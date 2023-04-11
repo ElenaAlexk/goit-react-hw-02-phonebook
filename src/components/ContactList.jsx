@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const ContactList = ({ contacts, deleteContact }) => {
   return (
     <ul>
-      {contacts.map(({ id, name, number }) => {
+      {contacts?.map(({ id, name, number }) => {
         return (
           <li key={id}>
             <span>{name}:</span>

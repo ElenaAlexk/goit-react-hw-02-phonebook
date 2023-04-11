@@ -4,7 +4,7 @@ import { Component } from 'react';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 
-export class App extends Component {
+export default class App extends Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -21,6 +21,7 @@ export class App extends Component {
       name,
       number,
     };
+
     this.state.contacts.filter(
       contact =>
         contact.name.toLowerCase().trim() ===
@@ -47,12 +48,12 @@ export class App extends Component {
 
   render() {
     return (
-      <>
+      <div>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
         <ContactList deleteContact={this.deleteContact} />
-      </>
+      </div>
     );
   }
 }
